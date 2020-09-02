@@ -1,31 +1,25 @@
 import React, { useState, useEffect } from 'react';
 
-import { Container, Info, Card } from './styles';
+import { Container } from './styles';
 import Header from '../../components/Header';
 import InputSearch from '../../components/InputSearch';
 import api from '../../services/api';
-
-interface propsType {
-  slot: number;
-  type: {
-    name: string;
-    url: string;
-  };
-}
+import CardInfo, { propsType } from '../../components/CardInfo';
 
 const DashBord: React.FC = () => {
   const [search, setSearch] = useState('');
+  const [id, setId] = useState(0);
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
   const [types, setTypes] = useState<propsType[]>([]);
 
   useEffect(() => {
     const load = async () => {
-      const { data } = await api.get('pokemon/ditto');
-
+      const { data } = await api.get('pokemon/bulbasaur');
+      console.log('Data: ', data);
       setName(data.name);
-      console.log('types: ', data.types[0]);
-      setImage(data.sprites.back_default);
+      setId(data.id);
+      setImage(data.sprites.other.dream_world.front_default);
       setTypes(data.types);
     };
 
@@ -44,19 +38,7 @@ const DashBord: React.FC = () => {
         placeHolder="Type the Pokémon name"
       />
 
-      <Card>
-        <span>#1</span>
-        <Info>
-          <img src={image} alt={name} />
-          <span>Name: {name}</span>
-          <span>
-            Types:
-            {types.map((item: propsType) => {
-              return <span key={item.slot}>{item.type.name}</span>;
-            })}
-          </span>
-        </Info>
-      </Card>
+      <CardInfo num={id} name={name} sprite={image} types={types} />
     </Container>
   );
 };

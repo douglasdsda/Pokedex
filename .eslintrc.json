@@ -48,12 +48,12 @@
     ],
     "import/prefer-default-export": "off",
     "camelcase": "off",
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      {
-        "allowExpressions": true
-      }
-    ],
+    // "@typescript-eslint/explicit-function-return-type": [
+    //   "error",
+    //   {
+    //     "allowExpressions": false
+    //   }
+    // ],
     "import/extensions": [
       "error",
       "ignorePackages",

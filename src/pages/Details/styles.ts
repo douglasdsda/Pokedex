@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+interface StatusBarValueProps {
+  valueWidth: number;
+}
 
 export const Container = styled.div``;
 
@@ -22,7 +26,6 @@ export const Card = styled.div`
   flex-direction: row;
   align-items: flex-start;
 
-  height: 240px;
   width: 240px;
 
   margin: 0 auto;
@@ -33,6 +36,13 @@ export const Card = styled.div`
   cursor: pointer;
 `;
 
+export const CardMain = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  font-size: 14px;
+`;
+
 export const CardHeader = styled.div`
   display: flex;
 
@@ -41,9 +51,73 @@ export const CardHeader = styled.div`
 
   flex: 1;
 
+  padding: 0 30px;
+
   img {
     margin: 0 auto;
     height: 110px;
     width: 110px;
+    margin-bottom: 10px;
   }
+`;
+
+export const CardHeaderInfo = styled.div`
+  margin-top: 10px;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+export const CardStatus = styled.div`
+  margin-top: 15px;
+  h2 {
+    text-align: center;
+    font-size: 14px;
+    color: #ff9000;
+  }
+`;
+export const StatusBar = styled.div`
+  display: flex;
+
+  width: 100%;
+
+  flex-direction: row;
+
+  align-items: center;
+`;
+export const StatusBarRank = styled.div`
+  border-radius: 8px;
+  margin-left: 5px;
+  background-color: #fff;
+  flex: 1;
+  height: 15px;
+`;
+
+export const StatusBarValue = styled.div<StatusBarValueProps>`
+  border-radius: 8px;
+
+  background-color: #ff9000;
+  flex: 1;
+  height: 15px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  span {
+    font-size: 12px;
+    padding: 0 5px;
+  }
+
+  ${props =>
+    css`
+      width: ${props.valueWidth}%;
+    `}
 `;

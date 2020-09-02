@@ -2,7 +2,18 @@ import React, { useState, useEffect } from 'react';
 
 import { FiArrowLeft } from 'react-icons/fi';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { Container, Main, Card, CardHeader } from './styles';
+import {
+  Container,
+  Main,
+  Card,
+  CardMain,
+  CardHeader,
+  CardHeaderInfo,
+  CardStatus,
+  StatusBar,
+  StatusBarRank,
+  StatusBarValue,
+} from './styles';
 import Header from '../../components/Header';
 import api from '../../services/api';
 
@@ -37,10 +48,35 @@ const Details: React.FC = () => {
         </div>
         <Card>
           <span>#1</span>
-          <CardHeader>
-            <img src={sprite} alt={name} />
-            <span>{name}</span>
-          </CardHeader>
+          <CardMain>
+            <CardHeader>
+              <img src={sprite} alt={name} />
+              <span>{name}</span>
+              <CardHeaderInfo>
+                <div>
+                  <span>69 KG</span>
+                  <span>Weight</span>
+                </div>
+
+                <div>
+                  <span>0.7 M</span>
+                  <span>Height</span>
+                </div>
+              </CardHeaderInfo>
+            </CardHeader>
+
+            <CardStatus>
+              <h2>Stats</h2>
+              <StatusBar>
+                <span>HP</span>
+                <StatusBarRank>
+                  <StatusBarValue valueWidth={56}>
+                    <span>56/100</span>
+                  </StatusBarValue>
+                </StatusBarRank>
+              </StatusBar>
+            </CardStatus>
+          </CardMain>
         </Card>
       </Main>
     </Container>

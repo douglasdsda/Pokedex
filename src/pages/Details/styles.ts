@@ -92,9 +92,10 @@ export const StatusBar = styled.div`
 
   flex-direction: row;
 
-  align-items: center;
+  align-items: flex-end;
 `;
 export const StatusBarRank = styled.div`
+  width: 100%;
   border-radius: 8px;
   margin-left: 5px;
   background-color: #fff;
@@ -120,4 +121,15 @@ export const StatusBarValue = styled.div<StatusBarValueProps>`
     css`
       width: ${props.valueWidth}%;
     `}
+`;
+
+export const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+export const FooterContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  overflow-x: hidden;
+  width: 99%;
 `;

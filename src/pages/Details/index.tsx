@@ -13,25 +13,48 @@ import {
   StatusBar,
   StatusBarRank,
   StatusBarValue,
+  Footer,
+  FooterContent,
 } from './styles';
 import Header from '../../components/Header';
 import api from '../../services/api';
+import CardInfo, { propsType } from '../../components/CardInfo';
 
 interface DetailsParams {
   pokemon: string;
 }
 
+interface StatsBase {
+  base_stat: number;
+  effort: number;
+  stat: {
+    name: string;
+    url: string;
+  };
+}
+
 const Details: React.FC = () => {
   const [name, setName] = useState('');
   const [sprite, setSprite] = useState('');
+  const [stats, setStats] = useState<StatsBase[]>([]);
   const { params } = useRouteMatch<DetailsParams>();
+  const [types, setTypes] = useState<propsType[]>([]);
+
   useEffect(() => {
     const load = async () => {
       const { data } = await api.get(`pokemon/${params.pokemon}`);
       console.log('Data: ', data);
       setName(data.name);
+      setTypes(data.types);
 
       setSprite(data.sprites.other.dream_world.front_default);
+      const list = data.stats.filter((item: StatsBase) => {
+        if (!item.stat.name.includes('special')) {
+          return { ...item };
+        }
+        return undefined;
+      });
+      setStats(list);
     };
 
     load();
@@ -67,18 +90,35 @@ const Details: React.FC = () => {
 
             <CardStatus>
               <h2>Stats</h2>
-              <StatusBar>
-                <span>HP</span>
-                <StatusBarRank>
-                  <StatusBarValue valueWidth={56}>
-                    <span>56/100</span>
-                  </StatusBarValue>
-                </StatusBarRank>
-              </StatusBar>
+              {stats.map(item => {
+                return (
+                  <StatusBar key={item.stat.url}>
+                    <span>{item.stat.name}</span>
+                    <StatusBarRank>
+                      <StatusBarValue valueWidth={item.base_stat}>
+                        <span>{item.base_stat}/100</span>
+                      </StatusBarValue>
+                    </StatusBarRank>
+                  </StatusBar>
+                );
+              })}
             </CardStatus>
           </CardMain>
         </Card>
       </Main>
+      <Footer>
+        <h2>Family Tree</h2>
+        <FooterContent>
+          <CardInfo num={1} name={name} sprite={sprite} types={types} />
+          <CardInfo num={1} name={name} sprite={sprite} types={types} />
+          <CardInfo num={1} name={name} sprite={sprite} types={types} />
+          <CardInfo num={1} name={name} sprite={sprite} types={types} />
+          <CardInfo num={1} name={name} sprite={sprite} types={types} />
+          <CardInfo num={1} name={name} sprite={sprite} types={types} />
+          <CardInfo num={1} name={name} sprite={sprite} types={types} />
+          <CardInfo num={1} name={name} sprite={sprite} types={types} />
+        </FooterContent>
+      </Footer>
     </Container>
   );
 };

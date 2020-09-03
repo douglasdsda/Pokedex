@@ -15,13 +15,13 @@ export const Container = styled.div`
 
   align-items: center;
 
-  img {
+  svg {
     width: 20px;
     height: 20px;
     margin-right: 10px;
     cursor: pointer;
 
-    background-color: #666360;
+    color: #666360;
   }
 
   span {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { Container, ListItens } from './styles';
 import Header from '../../components/Header';
@@ -27,6 +27,40 @@ const DashBord: React.FC = () => {
     setListPokemons([...pokemons]);
   }, [pokemons]);
 
+  const handleSearch = useCallback(
+    (e: number) => {
+      if (e === 13) {
+        if (search.trim()) {
+          const listSearch = listPokemons.filter(pokemon =>
+            pokemon.name.toUpperCase().includes(search.toUpperCase()),
+          );
+
+          setListPokemons([...listSearch]);
+        } else {
+          setListPokemons([...pokemons]);
+        }
+      }
+    },
+    [search, listPokemons, pokemons],
+  );
+
+  const handleKeyUp = useCallback(
+    (e: React.FormEvent<HTMLInputElement>) => {
+      const { value } = e.currentTarget;
+
+      if (value.trim()) {
+        const listSearch = listPokemons.filter(pokemon =>
+          pokemon.name.toUpperCase().includes(value.toUpperCase()),
+        );
+
+        setListPokemons([...listSearch]);
+      } else {
+        setListPokemons([...pokemons]);
+      }
+    },
+    [listPokemons, pokemons],
+  );
+
   return (
     <Container>
       <Header />
@@ -36,6 +70,8 @@ const DashBord: React.FC = () => {
         onChange={e => {
           setSearch(e.target.value);
         }}
+        onKeyPress={e => handleSearch(e.charCode)}
+        onKeyUp={handleKeyUp}
         placeHolder="Type the Pokémon name"
       />
 
@@ -53,7 +89,7 @@ const DashBord: React.FC = () => {
             );
           })
         ) : (
-          <h1>Carregando...</h1>
+          <h1>Sem Pokémons...</h1>
         )}
       </ListItens>
     </Container>

@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes, useMemo } from 'react';
 
+import { FiSearch } from 'react-icons/fi';
 import { Container } from './styles';
-import searchImg from '../../assets/search.svg';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeHolder: string;
@@ -15,7 +15,7 @@ const InputSearch: React.FC<InputProps> = ({ placeHolder, name, ...rest }) => {
 
   return (
     <Container>
-      <img src={searchImg} alt="Search" />
+      <FiSearch />
       <span>
         {placeHolder && hasValue && <label htmlFor={name}>{placeHolder}</label>}
         <input placeholder={placeHolder} type="text" id={name} {...rest} />

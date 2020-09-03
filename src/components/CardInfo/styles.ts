@@ -6,13 +6,13 @@ export const Container = styled.div`
   flex-direction: row;
 
   height: 240px;
-  width: 240px;
+  width: 320px;
 
   padding: 10px;
 
   background: #3e3b47;
   border-radius: 4px;
-  margin: 10px;
+  margin: 56px 57px;
   cursor: pointer;
 
   span {
@@ -33,8 +33,30 @@ export const Info = styled.div`
     width: 110px;
     margin: 0 auto;
   }
+
+  strong {
+    color: #ff9000;
+  }
+
+  strong + strong::before {
+    content: ', ';
+    color: #ff9000;
+  }
 `;
 
+export const Text = styled.span`
+  margin-right: 5px;
+`;
+export const Number = styled.span`
+  font-family: Roboto Slab;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  /* identical to box height */
+
+  color: #666360;
+`;
 export const Num = styled.span`
   color: #666360;
 `;

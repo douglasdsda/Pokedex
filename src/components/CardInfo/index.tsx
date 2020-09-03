@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { useHistory } from 'react-router-dom';
-import { Container, Info } from './styles';
+import { Container, Info, Text, Number } from './styles';
 
 export interface propsTypeIn {
   slot: number;
@@ -32,12 +32,14 @@ const CardInfo: React.FC<PropsCardInfo> = props => {
 
   return (
     <Container onClick={handleDetails}>
-      <span>#{props.num}</span>
+      <Number>#{props.num}</Number>
       <Info>
         <img src={props.sprite} alt={props.name} />
-        <span>Name: {props.name}</span>
+        <span>
+          <Text>Name:</Text> <strong>{props.name}</strong>{' '}
+        </span>
         <div>
-          Types:
+          <Text>Types:</Text>
           {props.types.map((item: propsType) => {
             return <strong key={item.name}>{item.name}</strong>;
           })}

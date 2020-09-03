@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Container, ListItens } from './styles';
 import Header from '../../components/Header';
 import InputSearch from '../../components/InputSearch';
-import api from '../../services/api';
+
 import CardInfo, { propsType } from '../../components/CardInfo';
+import { usePokemon } from '../../hooks/pokemons';
 
 interface PropsPokemons {
   id: number;
@@ -18,35 +19,13 @@ interface PropsPokemons {
 const DashBord: React.FC = () => {
   const [search, setSearch] = useState('');
 
+  const { pokemons } = usePokemon();
+
   const [listPokemons, setListPokemons] = useState<PropsPokemons[]>([]);
 
-  const setPokemon = useCallback(
-    async (index: number, list: PropsPokemons[]) => {
-      const { data } = await api.get(`pokemon/${index}`);
-
-      const item = {
-        id: index,
-        name: data.name,
-        sprite: data.sprites.other.dream_world.front_default,
-        idPokemon: data.id,
-        types: data.types,
-      };
-
-      list.push(item);
-    },
-    [],
-  );
-
   useEffect(() => {
-    const load = async () => {
-      const list: PropsPokemons[] = [];
-      for (let index = 1; index < 150; index += 1) {
-        await setPokemon(index, list);
-      }
-      setListPokemons([...list]);
-    };
-    load();
-  }, [setPokemon]);
+    setListPokemons([...pokemons]);
+  }, [pokemons]);
 
   return (
     <Container>

@@ -3,12 +3,17 @@ import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Container, Info } from './styles';
 
-export interface propsType {
+export interface propsTypeIn {
   slot: number;
   type: {
     name: string;
     url: string;
   };
+}
+
+export interface propsType {
+  name: string;
+  url: string;
 }
 
 interface PropsCardInfo {
@@ -34,7 +39,7 @@ const CardInfo: React.FC<PropsCardInfo> = props => {
         <div>
           Types:
           {props.types.map((item: propsType) => {
-            return <strong key={item.slot}>{item.type.name}</strong>;
+            return <strong key={item.name}>{item.name}</strong>;
           })}
         </div>
       </Info>

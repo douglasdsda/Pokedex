@@ -15,18 +15,28 @@ interface propsTypeIn {
   };
 }
 
+export interface StatsBase {
+  base_stat: number;
+  effort: number;
+  stat: {
+    name: string;
+    url: string;
+  };
+}
+
 interface propsType {
   name: string;
   url: string;
 }
 
-interface Pokemon {
+export interface Pokemon {
   id: number;
   idPokemon: number;
   name: string;
   sprite: string;
   types: propsType[];
   familyTree?: number[];
+  stats: StatsBase[];
 }
 
 interface PokemonContextData {
@@ -64,6 +74,7 @@ const PokemonProvider: React.FC = ({ children }) => {
         sprite: data.sprites.other.dream_world.front_default,
         idPokemon: data.id,
         types: formattedTypes,
+        stats: data.stats,
       };
 
       list.push(item);

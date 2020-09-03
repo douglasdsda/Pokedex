@@ -19,6 +19,7 @@ import {
 import Header from '../../components/Header';
 import api from '../../services/api';
 import CardInfo, { propsType } from '../../components/CardInfo';
+import { usePokemon } from '../../hooks/pokemons';
 
 interface DetailsParams {
   pokemon: string;
@@ -34,6 +35,8 @@ interface StatsBase {
 }
 
 const Details: React.FC = () => {
+  const { pokemons } = usePokemon();
+
   const [name, setName] = useState('');
   const [sprite, setSprite] = useState('');
   const [stats, setStats] = useState<StatsBase[]>([]);
@@ -41,24 +44,15 @@ const Details: React.FC = () => {
   const [types, setTypes] = useState<propsType[]>([]);
 
   useEffect(() => {
-    const load = async () => {
-      const { data } = await api.get(`pokemon/${params.pokemon}`);
-      console.log('Data : ', data);
-      setName(data.name);
-      setTypes(data.types);
-
-      setSprite(data.sprites.other.dream_world.front_default);
-      const list = data.stats.filter((item: StatsBase) => {
-        if (!item.stat.name.includes('special')) {
-          return { ...item };
-        }
-        return undefined;
-      });
-      setStats(list);
-    };
-
-    load();
-  }, [params.pokemon]);
+    const checkPokemon = pokemons.filter(item => item.name === params.pokemon);
+    if (checkPokemon && checkPokemon.length > 0) {
+      const pokemon = checkPokemon[0];
+      setName(pokemon.name);
+      setSprite(pokemon.sprite);
+      setStats(pokemon.stats);
+      setTypes(pokemon.types);
+    }
+  }, [pokemons]);
 
   return (
     <Container>

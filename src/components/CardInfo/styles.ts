@@ -12,7 +12,7 @@ export const Container = styled.div`
 
   background: #3e3b47;
   border-radius: 4px;
-  margin: 56px 57px;
+  margin: 10px;
   cursor: pointer;
 
   span {

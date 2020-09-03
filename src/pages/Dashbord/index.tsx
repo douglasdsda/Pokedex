@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { Container, ListItens } from './styles';
+import { Container, Main, ListItens } from './styles';
 import Header from '../../components/Header';
 import InputSearch from '../../components/InputSearch';
 
@@ -64,34 +64,36 @@ const DashBord: React.FC = () => {
   return (
     <Container>
       <Header />
-      <InputSearch
-        name="search"
-        value={search}
-        onChange={e => {
-          setSearch(e.target.value);
-        }}
-        onKeyPress={e => handleSearch(e.charCode)}
-        onKeyUp={handleKeyUp}
-        placeHolder="Type the Pokémon name"
-      />
+      <Main>
+        <InputSearch
+          name="search"
+          value={search}
+          onChange={e => {
+            setSearch(e.target.value);
+          }}
+          onKeyPress={e => handleSearch(e.charCode)}
+          onKeyUp={handleKeyUp}
+          placeHolder="Type the Pokémon name"
+        />
 
-      <ListItens>
-        {listPokemons && listPokemons.length > 0 ? (
-          listPokemons.map((pokemon: PropsPokemons) => {
-            return (
-              <CardInfo
-                key={pokemon.id}
-                num={pokemon.id}
-                name={pokemon.name}
-                sprite={pokemon.sprite}
-                types={pokemon.types}
-              />
-            );
-          })
-        ) : (
-          <h1>Sem Pokémons...</h1>
-        )}
-      </ListItens>
+        <ListItens>
+          {listPokemons && listPokemons.length > 0 ? (
+            listPokemons.map((pokemon: PropsPokemons) => {
+              return (
+                <CardInfo
+                  key={pokemon.id}
+                  num={pokemon.id}
+                  name={pokemon.name}
+                  sprite={pokemon.sprite}
+                  types={pokemon.types}
+                />
+              );
+            })
+          ) : (
+            <h1>Sem Pokémons...</h1>
+          )}
+        </ListItens>
+      </Main>
     </Container>
   );
 };

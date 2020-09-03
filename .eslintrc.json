@@ -37,6 +37,7 @@
     "import/no-duplicates": "off",
     "react/jsx-one-expression-per-line": "off",
     "no-unused-expressions": "off",
+    "no-await-in-loop": "off",
     "react/destructuring-assignment" : "off",
     "react/jsx-filename-extension": [
       1,

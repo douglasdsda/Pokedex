@@ -21,43 +21,32 @@ const DashBord: React.FC = () => {
   const [listPokemons, setListPokemons] = useState<PropsPokemons[]>([]);
 
   const setPokemon = useCallback(
-    async (listNames: any) => {
-      let index = 0;
+    async (index: number, list: PropsPokemons[]) => {
+      const { data } = await api.get(`pokemon/${index}`);
 
-      const list: PropsPokemons[] = [];
+      const item = {
+        id: index,
+        name: data.name,
+        sprite: data.sprites.other.dream_world.front_default,
+        idPokemon: data.id,
+        types: data.types,
+      };
 
-      await listNames.map(async (pokemon: PropsPokemons) => {
-        const pokemonRecord = await api.get(`pokemon/${pokemon.name}`);
-        const { data } = pokemonRecord;
-        const item = {
-          id: index,
-          name: data.name,
-          sprite: data.sprites.other.dream_world.front_default,
-          idPokemon: data.id,
-          types: data.types,
-        };
-
-        list.push(item);
-
-        index += 1;
-
-        return pokemonRecord;
-      });
-
-      setTimeout(() => {
-        setListPokemons([...list]);
-      }, 600);
+      list.push(item);
     },
-    [setListPokemons],
+    [],
   );
 
   useEffect(() => {
     const load = async () => {
-      const { data } = await api.get(`pokemon`);
-      setPokemon(data.results);
+      const list: PropsPokemons[] = [];
+      for (let index = 1; index < 150; index += 1) {
+        await setPokemon(index, list);
+      }
+      setListPokemons([...list]);
     };
     load();
-  }, []);
+  }, [setPokemon]);
 
   return (
     <Container>
@@ -72,17 +61,21 @@ const DashBord: React.FC = () => {
       />
 
       <ListItens>
-        {listPokemons.map((pokemon: PropsPokemons) => {
-          return (
-            <CardInfo
-              key={pokemon.id}
-              num={pokemon.id}
-              name={pokemon.name}
-              sprite={pokemon.sprite}
-              types={pokemon.types}
-            />
-          );
-        })}
+        {listPokemons && listPokemons.length > 0 ? (
+          listPokemons.map((pokemon: PropsPokemons) => {
+            return (
+              <CardInfo
+                key={pokemon.id}
+                num={pokemon.id}
+                name={pokemon.name}
+                sprite={pokemon.sprite}
+                types={pokemon.types}
+              />
+            );
+          })
+        ) : (
+          <h1>Carregando...</h1>
+        )}
       </ListItens>
     </Container>
   );

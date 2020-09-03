@@ -43,7 +43,7 @@ const Details: React.FC = () => {
   useEffect(() => {
     const load = async () => {
       const { data } = await api.get(`pokemon/${params.pokemon}`);
-      console.log('Data: ', data);
+      console.log('Data : ', data);
       setName(data.name);
       setTypes(data.types);
 
@@ -109,13 +109,6 @@ const Details: React.FC = () => {
       <Footer>
         <h2>Family Tree</h2>
         <FooterContent>
-          <CardInfo num={1} name={name} sprite={sprite} types={types} />
-          <CardInfo num={1} name={name} sprite={sprite} types={types} />
-          <CardInfo num={1} name={name} sprite={sprite} types={types} />
-          <CardInfo num={1} name={name} sprite={sprite} types={types} />
-          <CardInfo num={1} name={name} sprite={sprite} types={types} />
-          <CardInfo num={1} name={name} sprite={sprite} types={types} />
-          <CardInfo num={1} name={name} sprite={sprite} types={types} />
           <CardInfo num={1} name={name} sprite={sprite} types={types} />
         </FooterContent>
       </Footer>

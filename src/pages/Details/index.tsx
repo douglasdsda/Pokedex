@@ -17,7 +17,7 @@ import {
   FooterContent,
 } from './styles';
 import Header from '../../components/Header';
-import api from '../../services/api';
+
 import CardInfo, { propsType } from '../../components/CardInfo';
 import { usePokemon } from '../../hooks/pokemons';
 
@@ -52,7 +52,7 @@ const Details: React.FC = () => {
       setStats(pokemon.stats);
       setTypes(pokemon.types);
     }
-  }, [pokemons]);
+  }, [pokemons, params.pokemon]);
 
   return (
     <Container>

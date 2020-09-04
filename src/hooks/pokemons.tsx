@@ -63,6 +63,13 @@ const PokemonProvider: React.FC = ({ children }) => {
     return value;
   }, []);
 
+  const formatNameStat = useCallback((name: string) => {
+    if (name === 'hp') return 'HP';
+    if (name === 'attack') return 'ATK';
+    if (name === 'defense') return 'DEF';
+    return 'SPD';
+  }, []);
+
   const setPokemon = useCallback(
     async (index: number, list: Pokemon[]) => {
       const { data } = await api.get(`pokemon/${index}`);
@@ -70,10 +77,21 @@ const PokemonProvider: React.FC = ({ children }) => {
       const formattedTypes = data.types.map((item: propsTypeIn) => {
         return { ...item, name: formatUpperCase(item.type.name) };
       });
-      console.log('data: ', data);
-      const formattedStats = data.stats.map((item: StatsBase) => {
+
+      const formattedStats = data.stats.filter((item: StatsBase) => {
         if (!item.stat.name.includes('special')) {
-          return { ...item };
+          const stats = {
+            base_stat: item.base_stat,
+            effort: item.effort,
+            stat: {
+              name: formatNameStat(item.stat.name),
+              url: item.stat.url,
+            },
+          };
+
+          return {
+            ...stats,
+          };
         }
         return undefined;
       });
@@ -84,14 +102,14 @@ const PokemonProvider: React.FC = ({ children }) => {
         sprite: data.sprites.other.dream_world.front_default,
         idPokemon: data.id,
         types: formattedTypes,
-        stats: data.stats,
+        stats: formattedStats,
         weight: data.weight,
         height: data.height,
       };
 
       list.push(item);
     },
-    [formatUpperCase],
+    [formatUpperCase, formatNameStat],
   );
 
   useEffect(() => {

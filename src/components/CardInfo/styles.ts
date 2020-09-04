@@ -133,7 +133,7 @@ export const StatusBar = styled.div`
 `;
 export const StatusBarRank = styled.span`
   width: 100%;
-  max-width: 200px;
+  max-width: 240px;
   border-radius: 8px;
   margin-left: 5px;
   background-color: #fff;

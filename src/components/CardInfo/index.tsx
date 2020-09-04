@@ -66,7 +66,7 @@ const CardInfo: React.FC<PropsCardInfo> = props => {
                 <Text>Types:</Text>
                 {props.types &&
                   props.types.map((item: propsType) => {
-                    return <strong key={item.name}>{item.name}</strong>;
+                    return <strong key={Math.random()}>{item.name}</strong>;
                   })}
               </div>
             </>

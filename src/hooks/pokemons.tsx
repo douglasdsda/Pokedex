@@ -6,8 +6,9 @@ import React, {
   useEffect,
 } from 'react';
 import api from '../services/api';
+import { formatUpperCase, formatNameStat } from '../utils/utilsHelper';
 
-interface propsTypeIn {
+export interface propsTypeIn {
   slot: number;
   type: {
     name: string;
@@ -53,64 +54,44 @@ const PokemonContext = createContext<PokemonContextData>(
 const PokemonProvider: React.FC = ({ children }) => {
   const [listPokemons, setListPokemons] = useState<Pokemon[]>([]);
 
-  const formatUpperCase = useCallback((text: string) => {
-    const value = text
-      .toString()
-      .toLowerCase()
-      .replace(/(?:^|\s)\S/g, function (a: string) {
-        return a.toUpperCase();
-      });
-    return value;
+  const setPokemon = useCallback(async (index: number, list: Pokemon[]) => {
+    const { data } = await api.get(`pokemon/${index}`);
+    const name = formatUpperCase(data.name);
+    const formattedTypes = data.types.map((item: propsTypeIn) => {
+      return { ...item, name: formatUpperCase(item.type.name) };
+    });
+
+    const formattedStats = data.stats.map((item: StatsBase) => {
+      if (!item.stat.name.includes('special')) {
+        const stats = {
+          base_stat: item.base_stat,
+          effort: item.effort,
+          stat: {
+            name: formatNameStat(item.stat.name),
+            url: item.stat.url,
+          },
+        };
+
+        return {
+          ...stats,
+        };
+      }
+      return undefined;
+    });
+
+    const item = {
+      id: index,
+      name,
+      sprite: data.sprites.other.dream_world.front_default,
+      idPokemon: data.id,
+      types: formattedTypes,
+      stats: formattedStats,
+      weight: data.weight,
+      height: data.height,
+    };
+
+    list.push(item);
   }, []);
-
-  const formatNameStat = useCallback((name: string) => {
-    if (name === 'hp') return 'HP';
-    if (name === 'attack') return 'ATK';
-    if (name === 'defense') return 'DEF';
-    return 'SPD';
-  }, []);
-
-  const setPokemon = useCallback(
-    async (index: number, list: Pokemon[]) => {
-      const { data } = await api.get(`pokemon/${index}`);
-      const name = formatUpperCase(data.name);
-      const formattedTypes = data.types.map((item: propsTypeIn) => {
-        return { ...item, name: formatUpperCase(item.type.name) };
-      });
-
-      const formattedStats = data.stats.filter((item: StatsBase) => {
-        if (!item.stat.name.includes('special')) {
-          const stats = {
-            base_stat: item.base_stat,
-            effort: item.effort,
-            stat: {
-              name: formatNameStat(item.stat.name),
-              url: item.stat.url,
-            },
-          };
-
-          return {
-            ...stats,
-          };
-        }
-        return undefined;
-      });
-
-      const item = {
-        id: index,
-        name,
-        sprite: data.sprites.other.dream_world.front_default,
-        idPokemon: data.id,
-        types: formattedTypes,
-        stats: formattedStats,
-        weight: data.weight,
-        height: data.height,
-      };
-
-      list.push(item);
-    },
-    [formatUpperCase, formatNameStat],
-  );
 
   useEffect(() => {
     const load = async () => {

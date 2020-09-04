@@ -42,3 +42,9 @@ export const Back = styled.div`
     text-decoration: none;
   }
 `;
+
+export const ListTree = styled.div`
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+`;

@@ -157,6 +157,6 @@ export const StatusBarValue = styled.span<StatusBarValueProps>`
 
   ${props =>
     css`
-      width: ${props.valueWidth}%;
+      width: ${props.valueWidth > 100 ? 100 : props.valueWidth}%;
     `}
 `;

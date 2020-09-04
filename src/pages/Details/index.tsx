@@ -2,12 +2,20 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import { FiArrowLeft } from 'react-icons/fi';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { Container, Main, Footer, FooterContent, Back } from './styles';
+import {
+  Container,
+  Main,
+  Footer,
+  FooterContent,
+  Back,
+  ListTree,
+} from './styles';
 import Header from '../../components/Header';
 
 import CardInfo from '../../components/CardInfo';
-import { usePokemon, Pokemon } from '../../hooks/pokemons';
+import { usePokemon, Pokemon, propsTypeIn } from '../../hooks/pokemons';
 import api from '../../services/api';
+import { formatUpperCase } from '../../utils/utilsHelper';
 
 interface DetailsParams {
   pokemon: string;
@@ -39,13 +47,17 @@ const Details: React.FC = () => {
     async (names: string[], list: Pokemon[]) => {
       for (let index = 0; index < names.length; index += 1) {
         const family = await api.get(`pokemon/${names[index]}`);
+        const name = formatUpperCase(family.data.name);
+        const formattedTypes = family.data.types.map((item: propsTypeIn) => {
+          return { ...item, name: formatUpperCase(item.type.name) };
+        });
 
         const item = {
           id: family.data.id,
-          name: family.data.name,
+          name,
           sprite: family.data.sprites.other.dream_world.front_default,
           idPokemon: family.data.id,
-          types: family.data.types,
+          types: formattedTypes,
           stats: family.data.stats,
           weight: family.data.weight,
           height: family.data.height,
@@ -111,18 +123,20 @@ const Details: React.FC = () => {
       <Footer>
         <h2>Family Tree</h2>
         <FooterContent />
-        {tree.map((item: Pokemon) => {
-          return (
-            <CardInfo
-              key={item.id}
-              num={item.id}
-              name={item.name}
-              sprite={item.sprite}
-              types={item.types}
-              titleAndSubTitle
-            />
-          );
-        })}
+        <ListTree>
+          {tree.map((item: Pokemon) => {
+            return (
+              <CardInfo
+                key={item.id}
+                num={item.id}
+                name={item.name}
+                sprite={item.sprite}
+                types={item.types}
+                titleAndSubTitle
+              />
+            );
+          })}
+        </ListTree>
       </Footer>
     </Container>
   );

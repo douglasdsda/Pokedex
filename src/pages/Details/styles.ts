@@ -39,7 +39,7 @@ export const Card = styled.div`
 export const CardMain = styled.div`
   display: flex;
   flex-direction: column;
-
+  width: 100%;
   font-size: 14px;
 `;
 
@@ -48,8 +48,6 @@ export const CardHeader = styled.div`
 
   flex-direction: column;
   align-items: center;
-
-  flex: 1;
 
   padding: 0 30px;
 
@@ -79,6 +77,7 @@ export const CardHeaderInfo = styled.div`
 
 export const CardStatus = styled.div`
   margin-top: 15px;
+  width: 100%;
   h2 {
     text-align: center;
     font-size: 14px;
@@ -92,15 +91,19 @@ export const StatusBar = styled.div`
 
   flex-direction: row;
 
-  align-items: flex-end;
+  justify-content: space-between;
+  border: 1px solid red;
 `;
 export const StatusBarRank = styled.div`
   width: 100%;
+  max-width: 200px;
   border-radius: 8px;
   margin-left: 5px;
   background-color: #fff;
   flex: 1;
   height: 15px;
+  align-items: flex-end;
+  border: 1px solid red;
 `;
 
 export const StatusBarValue = styled.div<StatusBarValueProps>`
@@ -148,4 +151,17 @@ export const Back = styled.div`
     color: inherit;
     text-decoration: none;
   }
+`;
+
+export const ItemStatusPhys = styled.div`
+  color: #f4ede8;
+
+  line-height: 32px;
+`;
+
+export const PyhysItem = styled.div`
+  color: #666360;
+
+  font-size: 13px;
+  line-height: 21px;
 `;

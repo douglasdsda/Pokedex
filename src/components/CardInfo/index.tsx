@@ -36,7 +36,7 @@ const CardInfo: React.FC<PropsCardInfo> = props => {
       <Info>
         <img src={props.sprite} alt={props.name} />
         <span>
-          <Text>Name:</Text> <strong>{props.name}</strong>{' '}
+          <Text>Name:</Text> <strong>{props.name}</strong>
         </span>
         <div>
           <Text>Types:</Text>

@@ -31,8 +31,10 @@ export const Info = styled.div`
   flex-direction: column;
   flex: 1;
   align-items: flex-start;
+
   margin-top: 15px;
   padding: 8px 2px;
+  width: 100%;
 
   img {
     height: 101px;
@@ -42,6 +44,8 @@ export const Info = styled.div`
 
   strong {
     color: #ff9000;
+
+    width: 100% !important;
   }
 
   strong + strong::before {

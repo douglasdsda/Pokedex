@@ -16,6 +16,8 @@ import {
   Footer,
   FooterContent,
   Back,
+  ItemStatusPhys,
+  PyhysItem,
 } from './styles';
 import Header from '../../components/Header';
 
@@ -72,15 +74,15 @@ const Details: React.FC = () => {
               <img src={sprite} alt={name} />
               <span>{name}</span>
               <CardHeaderInfo>
-                <div>
+                <ItemStatusPhys>
                   <span>69 KG</span>
-                  <span>Weight</span>
-                </div>
+                  <PyhysItem>Weight</PyhysItem>
+                </ItemStatusPhys>
 
-                <div>
+                <ItemStatusPhys>
                   <span>0.7 M</span>
-                  <span>Height</span>
-                </div>
+                  <PyhysItem>Height</PyhysItem>
+                </ItemStatusPhys>
               </CardHeaderInfo>
             </CardHeader>
 

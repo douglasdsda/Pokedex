@@ -7,8 +7,8 @@ export const Main = styled.div`
 `;
 export const ListItens = styled.div`
   display: flex;
-  margin: 0 auto;
+
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
 `;

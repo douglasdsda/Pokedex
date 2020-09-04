@@ -19,6 +19,7 @@ export const Main = styled.div`
 export const Footer = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 0 30px;
 `;
 export const FooterContent = styled.div`
   display: flex;

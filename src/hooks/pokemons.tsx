@@ -61,22 +61,22 @@ const PokemonProvider: React.FC = ({ children }) => {
       return { ...item, name: formatUpperCase(item.type.name) };
     });
 
-    const formattedStats = data.stats.map((item: StatsBase) => {
+    const auxStats = data.stats.filter((item: StatsBase) => {
       if (!item.stat.name.includes('special')) {
-        const stats = {
-          base_stat: item.base_stat,
-          effort: item.effort,
-          stat: {
-            name: formatNameStat(item.stat.name),
-            url: item.stat.url,
-          },
-        };
-
-        return {
-          ...stats,
-        };
+        return { ...item };
       }
       return undefined;
+    });
+
+    const formattedStats = auxStats.map((item: StatsBase) => {
+      return {
+        base_stat: item.base_stat,
+        effort: item.effort,
+        stat: {
+          name: formatNameStat(item.stat.name),
+          url: item.stat.url,
+        },
+      };
     });
 
     const item = {

@@ -15,11 +15,14 @@ interface PropsContainer {
 export const Container = styled.div<PropsContainer>`
   padding: 10px;
 
+  display: block;
+
   width: 320px;
 
   background: #3e3b47;
   border-radius: 4px;
-  margin: 10px;
+
+  margin: 20px 57px 56px 0px;
 
   cursor: pointer;
 
@@ -45,6 +48,12 @@ export const Info = styled.div<PropsCard>`
   flex: 1;
   align-items: flex-start;
 
+  font-family: Roboto Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 32px;
+
   margin-top: 15px;
   padding: 8px 2px;
   width: 100%;
@@ -53,13 +62,15 @@ export const Info = styled.div<PropsCard>`
     height: 101px;
     width: 102px;
     margin: 0 auto;
+    margin-bottom: 15px;
   }
 
   strong {
     color: #ff9000;
     text-align: center;
-    margin-top: 10px;
+
     width: 100% !important;
+    line-height: 32px;
   }
 
   strong + strong::before {
@@ -71,6 +82,7 @@ export const Info = styled.div<PropsCard>`
 export const Text = styled.span`
   margin-right: 5px;
   color: #f4ede8;
+  line-height: 32px;
 `;
 export const Number = styled.span`
   color: #666360;
@@ -92,7 +104,7 @@ export const CardHeaderInfo = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 80px;
+  padding: 0 65px;
 
   div {
     display: flex;
@@ -102,18 +114,16 @@ export const CardHeaderInfo = styled.div`
   }
 `;
 export const ItemStatusPhys = styled.div`
+  margin-top: 10px;
   color: #f4ede8;
-
-  line-height: 32px;
 `;
 export const PyhysItem = styled.div`
   color: #666360;
 
   font-size: 13px;
-  line-height: 21px;
+  line-height: 24px;
 `;
 export const CardStatus = styled.div`
-  width: 100%;
   h2 {
     margin-bottom: 15px;
     text-align: center;
@@ -126,6 +136,7 @@ export const StatusBar = styled.div`
   width: 100%;
 
   flex-direction: row;
+  padding: 2px 10px;
 
   justify-content: space-between;
 
@@ -138,7 +149,7 @@ export const StatusBarRank = styled.span`
   margin-left: 5px;
   background-color: #fff;
   flex: 1;
-  height: 15px;
+  height: 18px;
   align-items: flex-end;
 `;
 export const StatusBarValue = styled.span<StatusBarValueProps>`
@@ -146,7 +157,7 @@ export const StatusBarValue = styled.span<StatusBarValueProps>`
 
   background-color: #ff9000;
   flex: 1;
-  height: 15px;
+  height: 18px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;

@@ -37,6 +37,8 @@ export interface Pokemon {
   types: propsType[];
   familyTree?: number[];
   stats: StatsBase[];
+  weight: string;
+  height: string;
 }
 
 interface PokemonContextData {
@@ -68,6 +70,14 @@ const PokemonProvider: React.FC = ({ children }) => {
       const formattedTypes = data.types.map((item: propsTypeIn) => {
         return { ...item, name: formatUpperCase(item.type.name) };
       });
+      console.log('data: ', data);
+      const formattedStats = data.stats.map((item: StatsBase) => {
+        if (!item.stat.name.includes('special')) {
+          return { ...item };
+        }
+        return undefined;
+      });
+
       const item = {
         id: index,
         name,
@@ -75,6 +85,8 @@ const PokemonProvider: React.FC = ({ children }) => {
         idPokemon: data.id,
         types: formattedTypes,
         stats: data.stats,
+        weight: data.weight,
+        height: data.height,
       };
 
       list.push(item);

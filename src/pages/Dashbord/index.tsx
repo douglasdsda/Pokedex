@@ -81,6 +81,7 @@ const DashBord: React.FC = () => {
             listPokemons.map((pokemon: PropsPokemons) => {
               return (
                 <CardInfo
+                  titleAndSubTitle
                   key={pokemon.id}
                   num={pokemon.id}
                   name={pokemon.name}

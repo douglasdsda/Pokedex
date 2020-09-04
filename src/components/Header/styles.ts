@@ -8,7 +8,6 @@ export const Container = styled.div`
 
   align-items: center;
 
-
   img {
     width: 80px;
     height: 80px;

@@ -15,6 +15,12 @@ export const Container = styled.div`
 
   align-items: center;
 
+  font-family: Roboto Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+
   svg {
     width: 20px;
     height: 20px;

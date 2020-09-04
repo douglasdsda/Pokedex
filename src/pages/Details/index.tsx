@@ -15,6 +15,7 @@ import {
   StatusBarValue,
   Footer,
   FooterContent,
+  Back,
 } from './styles';
 import Header from '../../components/Header';
 
@@ -58,11 +59,12 @@ const Details: React.FC = () => {
     <Container>
       <Header />
       <Main>
-        <div>
+        <Back>
           <Link to="/">
             <FiArrowLeft />
+            <span>Back</span>
           </Link>
-        </div>
+        </Back>
         <Card>
           <span>#1</span>
           <CardMain>

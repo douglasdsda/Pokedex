@@ -13,6 +13,12 @@ export const Container = styled.div`
   background: #3e3b47;
   border-radius: 4px;
   margin: 10px;
+
+  font-style: normal;
+
+  font-size: 24px;
+  line-height: 32px;
+
   cursor: pointer;
 
   span {
@@ -25,12 +31,12 @@ export const Info = styled.div`
   flex-direction: column;
   flex: 1;
   align-items: flex-start;
-
+  margin-top: 15px;
   padding: 8px 2px;
 
   img {
-    height: 110px;
-    width: 110px;
+    height: 101px;
+    width: 102px;
     margin: 0 auto;
   }
 
@@ -46,13 +52,9 @@ export const Info = styled.div`
 
 export const Text = styled.span`
   margin-right: 5px;
+  color: #f4ede8;
 `;
 export const Number = styled.span`
-  font-family: Roboto Slab;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 32px;
   /* identical to box height */
 
   color: #666360;

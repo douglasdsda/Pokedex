@@ -133,3 +133,19 @@ export const FooterContent = styled.div`
   overflow-x: hidden;
   width: 99%;
 `;
+
+export const Back = styled.div`
+  color: #ff9000;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 32px;
+
+  display: flex;
+  cursor: pointer;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+`;

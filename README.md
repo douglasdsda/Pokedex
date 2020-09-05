@@ -33,6 +33,7 @@ O projeto foi desenvolvido as seguintes tecnologias
 - [Axios](https://github.com/axios/axios)
 - [Styled Components](https://styled-components.com)
 - [hooks](https://pt-br.reactjs.org/docs/hooks-intro.html)
+- [Deploy usando Netlify](https://www.netlify.com/)
 
  ___
 

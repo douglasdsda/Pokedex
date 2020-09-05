@@ -4,6 +4,7 @@
 - [Pokédex](#-pokédex)
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Como Baixar o projeto](#-como-baixar-o-projeto)
+- [testes](#-testes)
 ___
 
 # 🚀 Apresentação
@@ -47,9 +48,24 @@ $ cd Pokedex
 # instalar as dependencias
 $ yarn install
 
-# iniciar react native em uma aba
+# iniciar react
 $ yarn start
 
+# acessar pagina do React
+
+$ localhost:3000
+
+```
+
+## ✔ Como Executar os Testes
+
+```bash
+
+# iniciar ps testes
+$ yarn test
+
+# iniciar com coverage
+$ yarn test:coverage
 
 ```
 

@@ -18,7 +18,6 @@ interface PropsPokemons {
 
 const DashBord: React.FC = () => {
   const [search, setSearch] = useState('');
-  const [current, setCurrent] = useState(1);
 
   const { pokemons, updateList } = usePokemon();
 
@@ -45,10 +44,8 @@ const DashBord: React.FC = () => {
     [search, listPokemons, pokemons],
   );
   const handleUpdateList = useCallback(() => {
-    const currentOld = current + 20;
-    setCurrent(old => old + 20);
-    updateList(listPokemons, currentOld);
-  }, [current, listPokemons, updateList]);
+    updateList(20);
+  }, [updateList]);
 
   const handleKeyUp = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {

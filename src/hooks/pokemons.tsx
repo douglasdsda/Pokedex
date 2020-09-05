@@ -45,7 +45,7 @@ export interface Pokemon {
 interface PokemonContextData {
   pokemons: Pokemon[];
   getPokemons(): void;
-  updateList(listInical?: Pokemon[], current?: number): void;
+  updateList(valueUpdate?: number): void;
   setPokemon(index: number): Promise<Pokemon>;
 }
 
@@ -96,9 +96,18 @@ const PokemonProvider: React.FC = ({ children }) => {
   }, []);
 
   const updateList = useCallback(
-    async (listInical?: Pokemon[], current?: number) => {
+    async (valueUpdate?: number) => {
       let list: Pokemon[] = [];
-      if (listInical) list = [...listInical];
+      let current = 1;
+      const localPokemons = localStorage.getItem('@Pokédex-douglas:pokemons');
+      const localCurrent = localStorage.getItem('@Pokédex-douglas:current');
+
+      if (localPokemons && localCurrent) {
+        list = [...JSON.parse(localPokemons)];
+        current = Number(localCurrent);
+      }
+
+      if (valueUpdate) current += valueUpdate;
 
       const numerforFor = current || 1;
 
@@ -106,6 +115,14 @@ const PokemonProvider: React.FC = ({ children }) => {
         const item = await setPokemon(index);
         list.push(item);
         setListPokemons([...list]);
+        localStorage.setItem(
+          '@Pokédex-douglas:pokemons',
+          JSON.stringify([...list]),
+        );
+        localStorage.setItem(
+          '@Pokédex-douglas:current',
+          current?.toString() || '1',
+        );
       }
     },
     [setPokemon],

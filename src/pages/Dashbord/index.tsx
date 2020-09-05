@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { Container, Main, ListItens } from './styles';
+import { Container, Main, ListItens, NotFound, ButtonFloating } from './styles';
 import Header from '../../components/Header';
 import InputSearch from '../../components/InputSearch';
 
 import CardInfo, { propsType } from '../../components/CardInfo';
-import { usePokemon } from '../../hooks/pokemons';
+import { usePokemon, Pokemon } from '../../hooks/pokemons';
 
 interface PropsPokemons {
   id: number;
@@ -18,10 +18,11 @@ interface PropsPokemons {
 
 const DashBord: React.FC = () => {
   const [search, setSearch] = useState('');
+  const [current, setCurrent] = useState(1);
 
-  const { pokemons } = usePokemon();
+  const { pokemons, updateList } = usePokemon();
 
-  const [listPokemons, setListPokemons] = useState<PropsPokemons[]>([]);
+  const [listPokemons, setListPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
     setListPokemons([...pokemons]);
@@ -43,6 +44,11 @@ const DashBord: React.FC = () => {
     },
     [search, listPokemons, pokemons],
   );
+  const handleUpdateList = useCallback(() => {
+    const currentOld = current + 20;
+    setCurrent(old => old + 20);
+    updateList(listPokemons, currentOld);
+  }, [current, listPokemons, updateList]);
 
   const handleKeyUp = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -63,6 +69,10 @@ const DashBord: React.FC = () => {
 
   return (
     <Container>
+      <ButtonFloating onClick={handleUpdateList}>
+        <span>Carregar</span>
+        <strong>+</strong>
+      </ButtonFloating>
       <Header />
       <Main>
         <InputSearch
@@ -91,7 +101,7 @@ const DashBord: React.FC = () => {
               );
             })
           ) : (
-            <h1>Sem Pokémons...</h1>
+            <NotFound>Nenhum Pokémon encontrado...</NotFound>
           )}
         </ListItens>
       </Main>

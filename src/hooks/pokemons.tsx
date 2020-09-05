@@ -45,6 +45,7 @@ export interface Pokemon {
 interface PokemonContextData {
   pokemons: Pokemon[];
   getPokemons(): void;
+  updateList(listInical?: Pokemon[], current?: number): void;
 }
 
 const PokemonContext = createContext<PokemonContextData>(
@@ -54,7 +55,7 @@ const PokemonContext = createContext<PokemonContextData>(
 const PokemonProvider: React.FC = ({ children }) => {
   const [listPokemons, setListPokemons] = useState<Pokemon[]>([]);
 
-  const setPokemon = useCallback(async (index: number, list: Pokemon[]) => {
+  const setPokemon = useCallback(async (index: number) => {
     const { data } = await api.get(`pokemon/${index}`);
     const name = formatUpperCase(data.name);
     const formattedTypes = data.types.map((item: propsTypeIn) => {
@@ -90,37 +91,40 @@ const PokemonProvider: React.FC = ({ children }) => {
       height: data.height,
     };
 
-    list.push(item);
+    return item;
   }, []);
+
+  const updateList = useCallback(
+    async (listInical?: Pokemon[], current?: number) => {
+      let list: Pokemon[] = [];
+      if (listInical) list = [...listInical];
+
+      const numerforFor = current || 1;
+
+      for (let index = numerforFor; index < numerforFor + 20; index += 1) {
+        const item = await setPokemon(index);
+        list.push(item);
+        setListPokemons([...list]);
+      }
+    },
+    [setPokemon],
+  );
 
   useEffect(() => {
     const load = async () => {
-      let list: Pokemon[] = [];
-      const listLocal = localStorage.getItem('@DesafioPokemonDouglas:pokemons');
-      if (listLocal) {
-        list = [...JSON.parse(listLocal)];
-        setListPokemons([...list]);
-      } else {
-        for (let index = 1; index < 150; index += 1) {
-          await setPokemon(index, list);
-        }
-
-        localStorage.setItem(
-          '@DesafioPokemonDouglas:pokemons',
-          JSON.stringify(list),
-        );
-        setListPokemons([...list]);
-      }
+      await updateList();
     };
     load();
-  }, [setPokemon]);
+  }, [updateList]);
 
   const getPokemons = useCallback(() => {
     return listPokemons;
   }, [listPokemons]);
 
   return (
-    <PokemonContext.Provider value={{ pokemons: listPokemons, getPokemons }}>
+    <PokemonContext.Provider
+      value={{ pokemons: listPokemons, getPokemons, updateList }}
+    >
       {children}
     </PokemonContext.Provider>
   );

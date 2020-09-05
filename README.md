@@ -14,11 +14,15 @@ ___
 
 
 </div>
+
 ___
 
 ## ⚡ Pokédex
 
-è um projeto em React js, e usa api pokémon, a ideia do projeto é fazer buscar de pokemon e ver seus dados e status bases.
+É um projeto em React js, e usa api pokémon, a ideia do projeto é fazer buscar de pokemon e ver seus dados e status bases.
+
+- [Link do site](https://pokemon-douglas.netlify.app/)
+
 ___
 ## 📚 Tecnologias utilizadas
 

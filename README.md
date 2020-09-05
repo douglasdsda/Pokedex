@@ -58,7 +58,7 @@ $ localhost:3000
 
 ```
 
-## ✔ Como Executar os Testes
+## ✔ Testes
 
 ```bash
 

@@ -22,11 +22,11 @@ interface DetailsParams {
 }
 
 const Details: React.FC = () => {
-  const { pokemons } = usePokemon();
+  const { setPokemon } = usePokemon();
 
   const { params } = useRouteMatch<DetailsParams>();
 
-  const [pokemon, setPokemon] = useState<Pokemon>();
+  const [pokemonDetail, setPokemonDetail] = useState<Pokemon>();
   const [tree, setTree] = useState<Pokemon[]>([]);
 
   const getNamesEvelutions = useCallback(async (data: any, myName: string) => {
@@ -70,28 +70,22 @@ const Details: React.FC = () => {
   );
 
   useEffect(() => {
-    const checkPokemon = pokemons.filter(item => item.name === params.pokemon);
-    if (checkPokemon && checkPokemon.length === 1) {
-      const data = checkPokemon[0];
+    const load = async () => {
+      const data = await setPokemon(Number(params.pokemon));
 
-      setPokemon(data);
+      setPokemonDetail(data);
 
-      const load = async () => {
-        const species = await api.get(`pokemon-species/${data.idPokemon}/`);
-        const evulutions = await api.get(species.data.evolution_chain.url);
+      const species = await api.get(`pokemon-species/${data.idPokemon}/`);
+      const evulutions = await api.get(species.data.evolution_chain.url);
 
-        const names = await getNamesEvelutions(
-          evulutions.data.chain,
-          data.name,
-        );
-        const list: Pokemon[] = [];
-        await setTreePokemons(names, list);
-        setTree([...list]);
-      };
+      const names = await getNamesEvelutions(evulutions.data.chain, data.name);
+      const list: Pokemon[] = [];
+      await setTreePokemons(names, list);
+      setTree([...list]);
+    };
 
-      load();
-    }
-  }, [pokemons, params.pokemon, getNamesEvelutions, setTreePokemons]);
+    load();
+  }, [setPokemon, params.pokemon, getNamesEvelutions, setTreePokemons]);
 
   return (
     <Container>
@@ -104,19 +98,20 @@ const Details: React.FC = () => {
           </Link>
         </Back>
 
-        {pokemon && (
+        {pokemonDetail && (
           <CardInfo
             containerStyle={{ margin: '0 auto' }}
-            key={pokemon.id}
-            num={pokemon.id}
-            name={pokemon.name}
-            sprite={pokemon.sprite}
-            types={pokemon.types}
-            weight={pokemon.weight}
-            height={pokemon.height}
+            key={pokemonDetail.id}
+            idPokemon={pokemonDetail.idPokemon}
+            num={pokemonDetail.id}
+            name={pokemonDetail.name}
+            sprite={pokemonDetail.sprite}
+            types={pokemonDetail.types}
+            weight={pokemonDetail.weight}
+            height={pokemonDetail.height}
             phys
             status
-            stats={pokemon.stats}
+            stats={pokemonDetail.stats}
           />
         )}
       </Main>
@@ -128,6 +123,7 @@ const Details: React.FC = () => {
             return (
               <CardInfo
                 key={item.id}
+                idPokemon={item.idPokemon}
                 num={item.id}
                 name={item.name}
                 sprite={item.sprite}

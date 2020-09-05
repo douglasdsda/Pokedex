@@ -94,6 +94,7 @@ const DashBord: React.FC = () => {
                   titleAndSubTitle
                   key={pokemon.id}
                   num={pokemon.id}
+                  idPokemon={pokemon.idPokemon}
                   name={pokemon.name}
                   sprite={pokemon.sprite}
                   types={pokemon.types}

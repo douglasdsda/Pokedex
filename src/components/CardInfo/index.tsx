@@ -32,6 +32,7 @@ export interface propsType {
 
 interface PropsCardInfo {
   num: number;
+  idPokemon: number;
   name: string;
   types?: propsType[];
   sprite: string;
@@ -48,8 +49,8 @@ const CardInfo: React.FC<PropsCardInfo> = props => {
   const history = useHistory();
 
   const handleDetails = useCallback(() => {
-    history.push(`/Details/${props.name}`);
-  }, [history, props.name]);
+    history.push(`/Details/${props.idPokemon}`);
+  }, [history, props.idPokemon]);
 
   return (
     <Container style={props.containerStyle} status onClick={handleDetails}>

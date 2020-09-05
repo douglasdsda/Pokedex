@@ -44,7 +44,11 @@ export const ButtonFloating = styled.div`
 
   cursor: pointer;
 
+  transition: background-color 0.3s;
+
   &:hover {
-    background: ${shade(0.2, '#ff9000')};
+    background-color: ${shade(0.2, '#ff9000')};
+    height: 93px;
+    width: 93px;
   }
 `;

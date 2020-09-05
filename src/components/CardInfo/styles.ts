@@ -36,6 +36,9 @@ export const Container = styled.div<PropsContainer>`
       height: 240px;
     `}
 
+  &:last-child {
+  }
+
   @media (max-width: 600px) {
     width: 100vw;
     margin: 20px 0px 20px 0px;
@@ -113,7 +116,7 @@ export const CardHeaderInfo = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 65px;
+  padding: 0 50px;
 
   div {
     display: flex;

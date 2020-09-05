@@ -46,6 +46,7 @@ interface PokemonContextData {
   pokemons: Pokemon[];
   getPokemons(): void;
   updateList(listInical?: Pokemon[], current?: number): void;
+  setPokemon(index: number): Promise<Pokemon>;
 }
 
 const PokemonContext = createContext<PokemonContextData>(
@@ -123,7 +124,7 @@ const PokemonProvider: React.FC = ({ children }) => {
 
   return (
     <PokemonContext.Provider
-      value={{ pokemons: listPokemons, getPokemons, updateList }}
+      value={{ pokemons: listPokemons, getPokemons, updateList, setPokemon }}
     >
       {children}
     </PokemonContext.Provider>

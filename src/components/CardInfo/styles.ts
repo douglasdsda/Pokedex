@@ -22,7 +22,7 @@ export const Container = styled.div<PropsContainer>`
   background: #3e3b47;
   border-radius: 4px;
 
-  margin: 20px 57px 56px 0px;
+  margin: 20px 50px 56px 0px;
 
   cursor: pointer;
 

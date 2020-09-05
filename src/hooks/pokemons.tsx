@@ -55,7 +55,7 @@ const PokemonContext = createContext<PokemonContextData>(
 const PokemonProvider: React.FC = ({ children }) => {
   const [listPokemons, setListPokemons] = useState<Pokemon[]>([]);
 
-  const setPokemon = useCallback(async (index: number) => {
+  const setPokemon = useCallback(async (index: number): Promise<Pokemon> => {
     const { data } = await api.get(`pokemon/${index}`);
     const name = formatUpperCase(data.name);
     const formattedTypes = data.types.map((item: propsTypeIn) => {

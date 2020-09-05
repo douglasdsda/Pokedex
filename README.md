@@ -1,14 +1,21 @@
 # 📕 Indice
 
 - [Apresentação](#-apresentação)
-- [Sobre](#-pokédex)
+- [Pokédex](#-pokédex)
 - [Tecnologias utilizadas](#-tecnologias-utilizadas)
 - [Como Baixar o projeto](#-como-baixar-o-projeto)
 ___
 
 # 🚀 Apresentação
-Em densenvolvimento...
+<div >
+  <img src="https://ik.imagekit.io/srlnjxcdtw/Capturar_5k5c5lXlVW0.PNG">
+
+  <img src="https://ik.imagekit.io/srlnjxcdtw/2_eqkEiuMZG.PNG">
+
+
+</div>
 ___
+
 ## ⚡ Pokédex
 
 è um projeto em React js, e usa api pokémon, a ideia do projeto é fazer buscar de pokemon e ver seus dados e status bases.

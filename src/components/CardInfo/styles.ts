@@ -35,6 +35,11 @@ export const Container = styled.div<PropsContainer>`
     css`
       height: 240px;
     `}
+
+  @media (max-width: 600px) {
+    width: 100vw;
+    margin: 20px 0px 20px 0px;
+  }
 `;
 export const CardHeader = styled.div`
   display: flex;
@@ -76,6 +81,10 @@ export const Info = styled.div<PropsCard>`
   strong + strong::before {
     content: ', ';
     color: #ff9000;
+  }
+
+  @media (max-width: 600px) {
+    align-items: center;
   }
 `;
 

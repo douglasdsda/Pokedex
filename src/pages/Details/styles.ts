@@ -14,6 +14,11 @@ export const Main = styled.div`
       width: 24px;
     }
   }
+
+  @media (max-width: 600px) {
+    align-items: center;
+    flex-wrap: wrap;
+  }
 `;
 
 export const Footer = styled.div`
@@ -42,10 +47,15 @@ export const Back = styled.div`
     color: inherit;
     text-decoration: none;
   }
+
+  @media (max-width: 600px) {
+    margin-bottom: 20px;
+  }
 `;
 
 export const ListTree = styled.div`
   display: flex;
   flex-direction: row;
-  overflow-x: scroll;
+  overflow-x: hidden;
+  flex-wrap: wrap;
 `;

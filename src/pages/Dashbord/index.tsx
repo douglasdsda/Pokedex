@@ -24,7 +24,7 @@ const DashBord: React.FC = () => {
   const [listPokemons, setListPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
-    setListPokemons([...pokemons]);
+    if (pokemons && pokemons.length > 0) setListPokemons([...pokemons]);
   }, [pokemons]);
 
   const handleSearch = useCallback(

@@ -100,6 +100,7 @@ const Details: React.FC = () => {
 
         {pokemonDetail && (
           <CardInfo
+            data-testid="Item-Card"
             containerStyle={{ margin: '0 auto' }}
             key={pokemonDetail.id}
             idPokemon={pokemonDetail.idPokemon}
